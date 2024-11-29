@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Order</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #25435f;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    h1,
+    h2 {
+      margin-top: 20px;
+      color: white; /* Change h1 and h2 color to white */
+    }
+
+    #orderOptions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px auto;
+    }
+
+    .big-btn {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      overflow: hidden;
+      padding: 0;
+      padding-top: 10%;
+      width: 330px;
+      height: 770px;
+    }
+
+    .big-btn::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .big-btn:hover::after {
+      opacity: 1;
+    }
+
+    .big-btn:nth-child(1) {
+      background-image: url('hc.jpg');
+    }
+
+    .big-btn:nth-child(2) {
+      background-image: url('cc.jpg');
+    }
+
+    .big-btn:nth-child(3) {
+      background-image: url('tea.jpg');
+    }
+
+    .big-btn:nth-child(4) {
+      background-image: url('ict.jpg');
+    }
+
+    #orderForm {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #25435f; /* Keep the background color consistent */
+      border: none;
+      color: white; /* Set text color for the form */
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+      color: white; /* Change label color to white */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      color: white; /* Set text color to white */
+      background-color: #333; /* Dark background for better contrast */
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white; /* Set button text color to white */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="orderOptions">
+    <button class="big-btn" data-text="Hot Coffees" onclick="showForm('Hot Coffees')"></button>
+    <button class="big-btn" data-text="Cold Coffees" onclick="showForm('Cold Coffees')"></button>
+    <button class="big-btn" data-text="Teas" onclick="showForm('Teas')"></button>
+    <button class="big-btn" data-text="Refreshments " onclick="showForm('Refreshments')"></button>
+  </div>
+
+  <form id="orderForm" class="hidden" action="orderpg.php" method="POST" style="background-color: #25435f; border: none;">
+    <h2 id="formTitle">Order Details</h2>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required />
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" min="1" placeholder="Enter quantity" required />
+
+    <label for="coffee_type">Coffee Type:</label>
+    <select id="coffee_type" name="coffee_type" required>
+      <option value="">Select Coffee Type</option>
+      <option value="Espresso">Espresso</option>
+      <option value="Latte">Latte</option>
+      <option value="Cappuccino">Cappuccino</option>
+      <option value="Americano">Americano</option>
+      <option value="Mocha">Mocha</option>
+    </select>
+
+    <input type="hidden" id="order_type" name="order_type" />
+
+    <button type="submit">Place Order</button>
+    <button type="button" onclick="goBack()" style="margin-left: 10px;">Back</button>
+  </form>
+
+  <script>
+    const orderForm = document.getElementById("orderForm");
+    const formTitle = document.getElementById("formTitle");
+
+    function showForm(orderType) {
+      document.getElementById("orderOptions").classList.add("hidden");
+      orderForm.classList.remove("hidden");
+      document.getElementById("order_type").value = orderType;
+      formTitle.textContent = `Order ${orderType}`;
+    }
+
+    function goBack() {
+      orderForm.classList.add("hidden");
+      document.getElementById("orderOptions").classList.remove("hidden");
+    }
+  </script>
+</body>
+
+</html>

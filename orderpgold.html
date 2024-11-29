@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .btn {
+      display: block;
+      margin: 20px auto;
+      width: 200px;
+      padding: 15px;
+      font-size: 18px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>Choose Your Service Type</h1>
+  <button class="btn" onclick="redirect('Dine-in')">Dine-in</button>
+  <button class="btn" onclick="redirect('Takeout')">Takeout</button>
+
+  <script>
+    function redirect(serviceType) {
+      window.location.href = `selectpg.html?serviceType=${encodeURIComponent(serviceType)}`;
+    }
+  </script>
+</body>
+</html>
